@@ -4,5 +4,19 @@ type CookieFortune {
 }
 
 type Query {
-  getFortuneCookies: [CookieFortune]! @cacheControl(scope: PUBLIC)
+  getFortuneCookies: [CookieFortune]!
+}
+
+type ResponseCreate {
+  DocumentId: ID!
+}
+
+type ResponseDeleted {
+  data: String
+  status: Int
+}
+
+type Mutation {
+  addFortuneCookie(phrase: String!): ResponseCreate!
+  deleteFortuneCookie(id: ID!): ResponseDeleted!
 }

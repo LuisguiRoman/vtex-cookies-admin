@@ -1,5 +1,5 @@
 import { InstanceOptions, IOContext, ExternalClient } from '@vtex/api';
-import { IFortuneCookie } from '../typings/fortuneCookies';
+import { IFortuneCookie, INewCookie } from '../typings/fortuneCookies';
 
 export class FortuneCookiesClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
@@ -24,8 +24,33 @@ export class FortuneCookiesClient extends ExternalClient {
 
       return response;
     } catch (error) {
-      console.log(error);
       return [];
     }
   }
+
+  public addCookie = async (phrase: string): Promise<INewCookie> => {
+    try {
+      const response = await this.http.post<INewCookie>(`/api/dataentities/CF/documents`,
+        {
+          CookieFortune: phrase
+        }
+      );
+
+      return {
+        DocumentId: response?.DocumentId || ''
+      };
+    } catch (error) {
+      throw new Error('Create Failed');
+    }
+  };
+
+  public deleteCookie = async (id: string): Promise<any> => {
+    try {
+      const response = await this.http.delete(`/api/dataentities/CF/documents/${id}`);
+      return response;
+    } catch (error) {
+      throw new Error('Delete Failed');
+    }
+  };
+  
 }

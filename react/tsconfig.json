@@ -23,11 +23,7 @@
       "strictPropertyInitialization": true,
       "target": "es2017"
     },
-    "include": [
-      "./typings/*.d.ts",
-      "./**/*.tsx",
-      "./**/*.ts"
-    ],
+    "include": ["./typings/*.d.ts", "./**/*.tsx", "./**/*.ts"],
     "typeAcquisition": {
       "enable": false
     }

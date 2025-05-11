@@ -1,0 +1,13 @@
+{
+    "section": "storeSetup",
+    "titleId": "admin/navigation.cookies",
+    "subSection": "Fortune ookies",
+    "searchKeyWordsHelpers": "admin/navigation.cookies",
+    "subSectionItems": [
+      {
+        "labelId": "admin/navigation.cookies",
+        "path": "/admin/fortune-cookies",
+        "searchKeyWordsHelpers": "admin/navigation.cookies"
+      }
+    ]
+  }

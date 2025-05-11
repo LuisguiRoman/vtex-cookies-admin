@@ -1,0 +1,6 @@
+mutation addCookieFortune($phrase: String!) {
+  createCookieFortune(data: { CookieFortune: $phrase }) {
+    id
+    CookieFortune
+  }
+}

@@ -1,0 +1,3 @@
+mutation deleteCookieFortune($id: ID!) {
+  deleteCookieFortune(id: $id)
+}

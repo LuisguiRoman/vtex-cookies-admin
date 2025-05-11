@@ -1,0 +1,6 @@
+query {
+  getFortuneCookies {
+    id,
+    CookieFortune
+  }
+}

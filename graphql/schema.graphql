@@ -1,0 +1,8 @@
+type CookieFortune {
+  id: ID!
+  CookieFortune: String
+}
+
+type Query {
+  getFortuneCookies: [CookieFortune]! @cacheControl(scope: PUBLIC)
+}

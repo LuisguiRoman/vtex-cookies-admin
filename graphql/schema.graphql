@@ -3,17 +3,19 @@ type CookieFortune {
   CookieFortune: String
 }
 
-type Query {
-  getFortuneCookies: [CookieFortune]!
-}
-
 type ResponseCreate {
-  DocumentId: ID!
+  id: ID!
+  phrase: String
 }
 
 type ResponseDeleted {
   data: String
   status: Int
+  id: ID
+}
+
+type Query {
+  getFortuneCookies: [CookieFortune]!
 }
 
 type Mutation {

@@ -1,3 +1,5 @@
-mutation deleteCookieFortune($id: ID!) {
-  deleteCookieFortune(id: $id)
+mutation deleteFortuneCookie($id: ID!) {
+  deleteFortuneCookie(id: $id){
+    id
+  }
 }

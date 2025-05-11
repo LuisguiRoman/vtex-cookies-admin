@@ -1,5 +1,6 @@
 mutation addFortuneCookie($phrase: String!) {
-  addFortuneCookie(data: { CookieFortune: $phrase }) {
-    CookieFortune
+  addFortuneCookie(phrase: $phrase) {
+    id
+    phrase
   }
 }

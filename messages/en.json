@@ -1,5 +1,13 @@
 {
     "admin/navigation.cookies": "Fortune cookies",
     "admin/table.phrase.title": "Phrase",
-    "admin/table.id.title": "Id"
+    "admin/table.id.title": "Id",
+    "admin/table.delete": "Delete",
+    "admin/page.title": "Fortune Cookies",
+    "admin/page.button.add": "Add cookie",
+    "admin/page.button.delete": "Delete cookie",
+    "admin/modal.button.cancel": "Cancel",
+    "admin/modal.button.save": "Save",
+    "admin/modal.title": "Add a new fortune cookie",
+    "admin/modal.question": "Are you sure you want to delete this fortune cookie?"
 }

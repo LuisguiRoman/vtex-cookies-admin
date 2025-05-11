@@ -1,5 +1,13 @@
 {
     "admin/navigation.cookies": "Galletas de la fortuna",
     "admin/table.phrase.title": "Frase",
-    "admin/table.id.title": "Id"
+    "admin/table.id.title": "Id",
+    "admin/table.delete": "Borrar",
+    "admin/page.title": "Galletas de la Fortuna",
+    "admin/page.button.add": "Agregar galleta",
+    "admin/page.button.delete": "Borrar galleta",
+    "admin/modal.button.cancel": "Cancelar",
+    "admin/modal.button.save": "Guardar",
+    "admin/modal.title": "Agrega una nueva galleta de la fortuna",
+    "admin/modal.question": "¿Seguro quieres borrar esta galleta de la fortuna?"
 }

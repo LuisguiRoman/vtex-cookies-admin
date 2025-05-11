@@ -1,5 +1,6 @@
 import { InstanceOptions, IOContext, ExternalClient } from '@vtex/api';
-import { IFortuneCookie, INewCookie } from '../typings/fortuneCookies';
+import { IFortuneCookie, INewCookie, INewCookieR } from '../typings/fortuneCookies';
+import { API_URLS } from '../config';
 
 export class FortuneCookiesClient extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
@@ -18,9 +19,7 @@ export class FortuneCookiesClient extends ExternalClient {
 
   public getCookies = async (): Promise<IFortuneCookie[]> => {
     try {
-      const response = await this.http.get(
-        `/api/dataentities/CF/search?_fields=id,CookieFortune`
-      );
+      const response = await this.http.get(API_URLS.listCookies);
 
       return response;
     } catch (error) {
@@ -30,14 +29,15 @@ export class FortuneCookiesClient extends ExternalClient {
 
   public addCookie = async (phrase: string): Promise<INewCookie> => {
     try {
-      const response = await this.http.post<INewCookie>(`/api/dataentities/CF/documents`,
+      const response = await this.http.post<INewCookieR>(API_URLS.addCookie,
         {
           CookieFortune: phrase
         }
       );
 
       return {
-        DocumentId: response?.DocumentId || ''
+        id: response?.DocumentId || '',
+        phrase
       };
     } catch (error) {
       throw new Error('Create Failed');
@@ -46,8 +46,11 @@ export class FortuneCookiesClient extends ExternalClient {
 
   public deleteCookie = async (id: string): Promise<any> => {
     try {
-      const response = await this.http.delete(`/api/dataentities/CF/documents/${id}`);
-      return response;
+      const response = await this.http.delete(`${API_URLS.deleteCookie}/${id}`);
+      return {
+        ...response,
+        id
+      };
     } catch (error) {
       throw new Error('Delete Failed');
     }

@@ -1,5 +1,13 @@
 {
     "admin/navigation.cookies": "admin/navigation.cookies",
     "admin/table.phrase.title": "admin/table.phrase.title",
-    "admin/table.id.title": "admin/table.id.title"
+    "admin/table.id.title": "admin/table.id.title",
+    "admin/table.delete": "admin/table.delete",
+    "admin/page.title": "admin/page.title",
+    "admin/page.button.add": "admin/page.button.add",
+    "admin/page.button.delete": "admin/page.button.delete",
+    "admin/modal.button.cancel": "admin/modal.button.cancel",
+    "admin/modal.button.save": "admin/modal.button.save",
+    "admin/modal.title": "admin/modal.title",
+    "admin/modal.question": "admin/modal.question"
 }

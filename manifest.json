@@ -27,5 +27,21 @@
       }
     }
   ],
+  "settingsSchema": {
+    "title": "Admin Fortune Cookies",
+    "type": "object",
+    "properties": {
+      "appKey": {
+        "title": "App key",
+        "description": "Enter your vtex app key (vtexappkey-XXXX) with masterdata permissions",
+        "type": "string"
+      },
+      "appToken": {
+        "title": "App Token",
+        "description": "Enter your vtex app token (XXXX...) with masterdata permissions",
+        "type": "string"
+      }
+    }
+  },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

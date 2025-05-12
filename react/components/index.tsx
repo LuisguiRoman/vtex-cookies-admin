@@ -3,12 +3,14 @@ import { useQuery, useMutation } from 'react-apollo';
 import GET_ALL_FORTUNE_COOKIES from '../graphql/fortuneCookies.graphql';
 import ADD_COOKIE_FORTUNE from '../graphql/addCookieFortune.graphql';
 import DELETE_COOKIE_FORTUNE from '../graphql/deleteCookieFortune.graphql';
-import { Table, Modal, Button, Input, Spinner, ModalDialog } from 'vtex.styleguide';
+import { Table, Button, Spinner } from 'vtex.styleguide';
 import { MessageDescriptor, useIntl } from 'react-intl';
 import { IDataCookies, IcookieItem } from '../typings/cookies';
 import { messages } from '../messages';
+import { AddModal } from './AddCookieModal';
+import { DeleteModal } from './DeleteCookieModal';
 
-export const CookiesTable = () => {
+export const FortuneCookies = () => {
   const [ items, setItems ] = useState<IcookieItem[]>([]);
   const [ isModalOpen, setModalOpen ] = useState<boolean>(false);
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -76,7 +78,10 @@ export const CookiesTable = () => {
         width: 250,
         cellRenderer: ({ rowData }: any) => {
           return (
-            <Button className="ttc" size="small" variation="danger-tertiary" 
+            <Button 
+              className="ttc" 
+              size="small" 
+              variation="danger-tertiary" 
               onClick={() => handleDeleteCookie(rowData.id)}>
               {translateMessage(messages.delete)}
             </Button>
@@ -86,71 +91,47 @@ export const CookiesTable = () => {
     }
   };
 
-  if(isTableLoading){
-    return <Spinner />
-  }
-
   return (
     <>
       <div className="ph4 ph9-m pv6">
-        <h2>{translateMessage(messages.pageTitle)}</h2>
-        <Button disabled={isLoading} onClick={openModal}>{translateMessage(messages.addCookie)}</Button>
+        <h2>
+          {translateMessage(messages.pageTitle)}
+        </h2>
+        <Button disabled={isLoading} onClick={openModal}>
+          {translateMessage(messages.addCookie)}
+        </Button>
 
-        <Table
-          fullWidth
-          items={items}
-          schema={schema}
-        />
+        <div className="flex items-center justify-center flex-column">
+            {isTableLoading ? (
+              <Spinner />
+            ): (
+              <div className="w-100">
+                <Table
+                  fullWidth={true}
+                  items={items}
+                  schema={schema}
+                />
+              </div>
+            )}
+        </div>
       </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        bottomBar={
-          <div className="flex">
-            <Button variation="tertiary" onClick={closeModal}>
-              {translateMessage(messages.cancel)}
-            </Button>
-            <Button
-              disabled={isLoading}
-              onClick={handleAddCookie}
-            >
-              {translateMessage(messages.save)}
-            </Button>
-          </div>
-        }
-      >
-        <h4>{translateMessage(messages.createNewCookie)}</h4>
-        <div>
-          <Input
-            label={translateMessage(messages.phrase)}
-            value={newPhrase}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              setNewPhrase(event.target.value)
-            }
-          />
-        </div>
-      </Modal>
+      <AddModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        isLoading={isLoading}
+        handleAddCookie={handleAddCookie}
+        newPhrase={newPhrase}
+        setNewPhrase={setNewPhrase}
+       />
 
-      <ModalDialog
-        centered
-        isOpen={isDialogOpen}
-        loading={isDeleting}
-        confirmation={{
-          onClick: () => deleteCookie({ variables: { id: selectedId } }),
-          label: translateMessage(messages.deleteCookie),
-          isDangerous: true,
-        }}
-        cancelation={{
-          onClick: () => setDialogOpen(false),
-          label: translateMessage(messages.cancel),
-        }}
-        onClose={() => setDialogOpen(false)}
-      >
-        <p>
-          {translateMessage(messages.question)}
-        </p>
-      </ModalDialog>
+      <DeleteModal 
+        isDialogOpen={isDialogOpen}
+        setDialogOpen={setDialogOpen}
+        isDeleting={isDeleting}
+        selectedId={selectedId}
+        deleteCookie={deleteCookie}
+      />
     </>
   )
 };

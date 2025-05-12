@@ -1,8 +1,3 @@
-import React from 'react'
-import { CookiesTable } from './components/CookiesTable';
-
-const FortuneCookies = () => (
-  <CookiesTable />
-)
+import { FortuneCookies } from './components';
 
 export default FortuneCookies;

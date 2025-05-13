@@ -1,9 +1,9 @@
 {
   "vendor": "valtech",
-  "name": "admin-cookies",
+  "name": "roman-admin-cookies",
   "version": "1.0.0",
-  "title": "Getting Started with VTEX",
-  "description": "A sample edition app with a blank",
+  "title": "Challenge Fortune Cookies",
+  "description": "A sample app to create fortune cookies with masterdata",
   "builders": {
     "react": "3.x",
     "admin": "0.x",

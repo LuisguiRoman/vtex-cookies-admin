@@ -3,12 +3,13 @@ import { useQuery, useMutation } from 'react-apollo';
 import GET_ALL_FORTUNE_COOKIES from '../graphql/fortuneCookies.graphql';
 import ADD_COOKIE_FORTUNE from '../graphql/addCookieFortune.graphql';
 import DELETE_COOKIE_FORTUNE from '../graphql/deleteCookieFortune.graphql';
-import { Table, Button, Spinner } from 'vtex.styleguide';
+import { Table, Button, Spinner, ButtonWithIcon, IconDelete } from 'vtex.styleguide';
 import { MessageDescriptor, useIntl } from 'react-intl';
 import { IDataCookies, IcookieItem } from '../typings/cookies';
 import { messages } from '../messages';
 import { AddModal } from './AddCookieModal';
 import { DeleteModal } from './DeleteCookieModal';
+
 
 export const FortuneCookies = () => {
   const [ items, setItems ] = useState<IcookieItem[]>([]);
@@ -37,7 +38,7 @@ export const FortuneCookies = () => {
   const closeModal = useCallback(() => setModalOpen(false), []);
 
   const handleAddCookie = () => {
-    if(newPhrase){
+    if(newPhrase && newPhrase?.trim()){
       addCookie({ variables: { phrase: newPhrase } });
     }
   }
@@ -75,16 +76,15 @@ export const FortuneCookies = () => {
       },
       delete: {
         title: translateMessage(messages.deleteCookie),
-        width: 250,
+        width: 150,
         cellRenderer: ({ rowData }: any) => {
           return (
-            <Button 
-              className="ttc" 
+            <ButtonWithIcon 
+              className="ttc center" 
               size="small" 
-              variation="danger-tertiary" 
-              onClick={() => handleDeleteCookie(rowData.id)}>
-              {translateMessage(messages.delete)}
-            </Button>
+              variation="danger"
+              icon={<IconDelete />}
+              onClick={() => handleDeleteCookie(rowData.id)} />
           )
         },
       }
@@ -93,7 +93,7 @@ export const FortuneCookies = () => {
 
   return (
     <>
-      <div className="ph4 ph9-m pv6">
+      <div className="ph4 pv8 w-100 w-90-s w-70-l center">
         <h2>
           {translateMessage(messages.pageTitle)}
         </h2>

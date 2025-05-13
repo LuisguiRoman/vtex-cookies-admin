@@ -3,7 +3,7 @@ import { useQuery, useMutation } from 'react-apollo';
 import GET_ALL_FORTUNE_COOKIES from '../graphql/fortuneCookies.graphql';
 import ADD_COOKIE_FORTUNE from '../graphql/addCookieFortune.graphql';
 import DELETE_COOKIE_FORTUNE from '../graphql/deleteCookieFortune.graphql';
-import { Table, Button, Spinner, ButtonWithIcon, IconDelete } from 'vtex.styleguide';
+import { Table, Spinner, ButtonWithIcon, IconDelete } from 'vtex.styleguide';
 import { MessageDescriptor, useIntl } from 'react-intl';
 import { IDataCookies, IcookieItem } from '../typings/cookies';
 import { messages } from '../messages';
@@ -94,12 +94,9 @@ export const FortuneCookies = () => {
   return (
     <>
       <div className="ph4 pv8 w-100 w-90-s w-70-l center">
-        <h2>
+        <h2 className="f3 mb6">
           {translateMessage(messages.pageTitle)}
         </h2>
-        <Button disabled={isLoading} onClick={openModal}>
-          {translateMessage(messages.addCookie)}
-        </Button>
 
         <div className="flex items-center justify-center flex-column">
             {isTableLoading ? (
@@ -107,6 +104,12 @@ export const FortuneCookies = () => {
             ): (
               <div className="w-100">
                 <Table
+                  toolbar={{
+                    newLine: {
+                      label: translateMessage(messages.addCookie),
+                      handleCallback: openModal,
+                    }
+                  }}
                   fullWidth={true}
                   items={items}
                   schema={schema}

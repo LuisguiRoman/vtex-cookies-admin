@@ -8,6 +8,6 @@
     "admin/page.button.delete": "Borrar galleta",
     "admin/modal.button.cancel": "Cancelar",
     "admin/modal.button.save": "Guardar",
-    "admin/modal.title": "Agrega una nueva galleta de la fortuna",
+    "admin/modal.title": "Agrega una nueva frase de galleta de la fortuna",
     "admin/modal.question": "¿Seguro quieres borrar esta galleta de la fortuna?"
 }

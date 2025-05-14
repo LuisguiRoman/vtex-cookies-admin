@@ -1,62 +1,47 @@
-# Hello Editions #
+# Fortune Cookies VTEX IO App
 
-A quick setup for an edition app in VTEX.
+Una aplicación personalizada para VTEX IO que muestra la lista de “galleta de la fortuna” y a la cual se pueden agregar nuevas galletas. 
 
-### Getting Started ###
+---
 
-#### Clone ####
+## 🚀 Características
 
-To clone this repository simply run `vtex init` and choose the `edition app` option.
+- Obtención de frases desde Master Data (entidad `CF`)
+- Agregar nuevas galletas desde el modal
+- Eliminar galletas (no finalizado, la mutacion devuelve bad request)
 
-If you don't have `vtex` toolbelt installed, you can also clone it manually:
+---
+## Ver aplicación
+Dirigirse al admin del workspace "romanchallenge" e ir a la sección de Apps -> Galletas de la fortuna o en el buscador escribir galletas de la fortuna
+[Dirigirse al workspace de romanchallenge](https://romanchallenge--valtech.myvtex.com/admin/fortune-cookies)
 
-```
-$ git clone https://github.com/vtex/edition-hello edition-hello
-$ cd edition-hello
-```
+---
 
-#### Manifest definition ####
+## 📋 Requisitos
 
-After that, you need to, in the `manifest.json`:
- - Change the `vendor` and `name` to your preferred choice
-   - By convention, we name any edition app with an `edition-` prefix, like `edition-hello` or `edition-global`
- - Set the appropriate parent edition in the `dependencies` field (must be published by the vendor's sponsor)
+- Node.js ≥ 14
+- VTEX Toolbelt (`vtex`)
+- Acceso a un workspace en VTEX IO
+- Master Data configurado con entidad `CF` y campo `CookieFortune`
 
-#### Adding apps for sub-accounts ####
+---
 
-Then, you can specify apps to be installed in the sub-accounts that have this edition configured.
-You do that through the `edition/apps.json` file, adding an entry to the object under the `apps` key
-in the format:
+## ⚙️ Instalación
 
-```
-    "<vendor>.<name>": {
-      "major": <desired major>,
-      "settings": <initial settings>
-    }
-```
+1. Clona el repositorio:
+- `git clone git@github.com:LuisguiRoman/vtex-cookies-admin.git`
 
-The settings are optional and can be omitted, but they will define the initial settings that should be
-configured for the app when it is installed through the current edition.
+---
 
-e.g.: The contents of the `apps.json` file could be:
-```
-{
-  "apps": {
-    "vtex.node-getting-started": { "major": 0 }
-  }
-}
-```
+## Enlaza tu app en un workspace de VTEX:
+- `vtex login youraccount`
+- `vtex use yourworkspace`
+- `vtex link`
 
-#### Testing ####
+---
 
-Be sure to have [VTEX's toolbelt](https://github.com/vtex/toolbelt)
-installed.
+## Deploy
+- `vtex publish`
+- `vtex deploy vendor.appname@x.x.x`
+- `vtex install vendor.appname@x.x.x`
 
-Edition apps are not link-able, so to test you have to launch a pre-release versions and set them
-on test accounts or workspaces for validation. To do so:
- - Launch a pre-release of your edition: `vtex release patch beta`
- - Check the edition of current account/workspace: `vtex edition`
- - Set the edition in current account/workspace: `vtex edition set <edition>@<version>`
-   - All the apps configured in the `apps.json` file will be automatically installed in that
-   workspace where the edition was set. You can validate that by inspecting the `vtex ls`
-   command output.

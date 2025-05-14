@@ -35,6 +35,7 @@ export const FortuneCookies = () => {
       pageSize
     }
   });
+
   const [ addCookie, { loading: isLoading } ] = useMutation<
   { createDocument: { documentId: string } }, CreateDocumentVars>(ADD_COOKIE_FORTUNE, {
       onCompleted: (data) => {
@@ -45,9 +46,16 @@ export const FortuneCookies = () => {
         handleAddItem(newCookie);
       }
   });
-  const [ deleteCookie, { loading: isDeleting } ] = useMutation(DELETE_COOKIE_FORTUNE,{
+
+  // not working bad request
+  const [ deleteCookie, { loading: isDeleting } ] = useMutation(DELETE_COOKIE_FORTUNE, {
+    context: {
+      clientName: 'store-graphql',
+      fetchOptions: {
+        credentials: 'include',
+      },
+    },
       onCompleted: (data) => {
-        console.log('data: ', data);
         handleDeleteItem(data?.deleteDocument?.documentId);
       }
     }
@@ -103,15 +111,12 @@ export const FortuneCookies = () => {
         width: 150,
         cellRenderer: ({ rowData }: any) => {
           return (
-            <>
             <ButtonWithIcon 
               className="ttc center" 
               size="small" 
               variation="danger"
               icon={<IconDelete />}
               onClick={() => handleDeleteCookie(rowData.id)} />
-
-            </>
           )
         },
       }

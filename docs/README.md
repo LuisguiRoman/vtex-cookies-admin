@@ -1,25 +1,47 @@
-# [Deprecating] Admin Example
+# Fortune Cookies VTEX IO App
 
-_We're working on our new design system. Please get in touch if you are part of VTEX product team and working on an admin app. If you are external to VTEX you can still use this repo._
+Una aplicación personalizada para VTEX IO que muestra la lista de “galleta de la fortuna” y a la cual se pueden agregar nuevas galletas. 
 
-An example admin app that adds a menu button to the admin sidebar and a navigation via parameter example.
+---
 
-### How to develop admins
+## 🚀 Características
 
-1. Admins always declare routes in `/admin/app/<route>`
+- Obtención de frases desde Master Data (entidad `CF`)
+- Agregar nuevas galletas desde el modal
+- Eliminar galletas (no finalizado, la mutacion devuelve bad request)
 
-2. Declare the `admin` builder in your manifest
+---
+## Ver aplicación
+Dirigirse al admin del workspace "romanchallenge" e ir a la sección de Apps -> Galletas de la fortuna o en el buscador escribir galletas de la fortuna
+[Dirigirse al workspace de romanchallenge](https://romanchallenge--valtech.myvtex.com/admin/fortune-cookies)
 
-3. When installed, the user navigates to `/admin/<route>`, but your app runs in an iframe that points to `/admin/app/<route>`.
+---
 
-4. You can develop directly in the `/admin/app` route for convenience, but don't forget to test it inside the iframe. :)
+## 📋 Requisitos
 
-### Quickstart
+- Node.js ≥ 14
+- VTEX Toolbelt (`vtex`)
+- Acceso a un workspace en VTEX IO
+- Master Data configurado con entidad `CF` y campo `CookieFortune`
 
-1. Clone this repo
+---
 
-2. `yarn --cwd react/` for code completion
+## ⚙️ Instalación
 
-3. `vtex link`
+1. Clona el repositorio:
+- `git clone git@github.com:LuisguiRoman/vtex-cookies-admin.git`
 
-4. Navigate to `workspace--account.myvtex.com/admin/app/example`
+---
+
+## Enlaza tu app en un workspace de VTEX:
+- `vtex login youraccount`
+- `vtex use yourworkspace`
+- `vtex link`
+
+---
+
+## Deploy
+- `vtex publish`
+- `vtex deploy vendor.appname@x.x.x`
+- `vtex install vendor.appname@x.x.x`
+

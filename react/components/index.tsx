@@ -5,7 +5,7 @@ import ADD_COOKIE_FORTUNE from '../graphql/addCookieFortune.graphql';
 import DELETE_COOKIE_FORTUNE from '../graphql/deleteCookieFortune.graphql';
 import { Table, Spinner, ButtonWithIcon, IconDelete } from 'vtex.styleguide';
 import { MessageDescriptor, useIntl } from 'react-intl';
-import { IcookieItem, CreateDocumentVars } from '../typings/cookies';
+import { IcookieItem } from '../typings/cookies';
 import { messages } from '../messages';
 import { AddModal } from './AddCookieModal';
 import { DeleteModal } from './DeleteCookieModal';
@@ -24,11 +24,6 @@ export const FortuneCookies = () => {
 
   const { data, loading: isTableLoading } = useQuery(GET_ALL_FORTUNE_COOKIES, {
     fetchPolicy: 'no-cache',
-    context: {
-      fetchOptions: {
-        cache: 'no-store'
-      },
-    },
     variables: {
       acronym,
       fields,
@@ -36,8 +31,7 @@ export const FortuneCookies = () => {
     }
   });
 
-  const [ addCookie, { loading: isLoading } ] = useMutation<
-  { createDocument: { documentId: string } }, CreateDocumentVars>(ADD_COOKIE_FORTUNE, {
+  const [ addCookie, { loading: isLoading } ] = useMutation(ADD_COOKIE_FORTUNE, {
       onCompleted: (data) => {
         const newCookie = {
           id: data?.createDocument?.documentId || '',
@@ -47,14 +41,7 @@ export const FortuneCookies = () => {
       }
   });
 
-  // not working bad request
   const [ deleteCookie, { loading: isDeleting } ] = useMutation(DELETE_COOKIE_FORTUNE, {
-    context: {
-      clientName: 'store-graphql',
-      fetchOptions: {
-        credentials: 'include',
-      },
-    },
       onCompleted: (data) => {
         handleDeleteItem(data?.deleteDocument?.documentId);
       }

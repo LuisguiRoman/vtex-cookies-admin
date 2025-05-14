@@ -2,7 +2,7 @@ mutation CreateDocument(
   $acronym: String!
   $document: DocumentInput!
 ) {
-  createDocument(acronym: $acronym, document: $document) @context(provider: "vtex.store-graphql") {
+  createDocument(acronym: $acronym, document: $document) {
     documentId
   }
 }

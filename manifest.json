@@ -1,7 +1,7 @@
 {
   "vendor": "valtech",
   "name": "fortune-admin-cookies",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "title": "Challenge Fortune Cookies",
   "description": "A sample app to create fortune cookies with masterdata",
   "builders": {
@@ -12,8 +12,7 @@
   },
   "dependencies": {
     "vtex.styleguide": "9.x",
-    "vtex.store-graphql": "2.x",
-    "vtex.render-runtime": "8.x"
+    "vtex.store-graphql": "2.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

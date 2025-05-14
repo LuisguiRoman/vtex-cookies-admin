@@ -8,13 +8,13 @@ Una aplicación personalizada para VTEX IO que muestra la lista de “galleta de
 
 - Obtención de frases desde Master Data (entidad `CF`)
 - Agregar nuevas galletas desde el modal
-- Eliminar galletas `(no finalizado, la mutacion devuelve bad request)`
+- Eliminar galletas
 
 ---
 ## Ver aplicación
-Dirigirse al admin del workspace "romanchallenge" e ir a la sección de Apps -> Galletas de la fortuna o en el buscador escribir galletas de la fortuna
+Dirigirse al admin del workspace "romanchallenge" e ir a la sección de Apps -> Galletas de la fortuna o en el buscador escribir galletas de la fortuna, tener en cuanta que la caché de la masterdata afecta las peticiones GET
 [Dirigirse al workspace de romanchallenge](https://romanchallenge--valtech.myvtex.com/admin/fortune-cookies)
-
+[Tabla con los datos de masterdata](https://valtech.vtexcrm.com.br/)
 ---
 
 ## 📋 Requisitos

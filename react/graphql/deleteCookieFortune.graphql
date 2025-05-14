@@ -1,5 +1,11 @@
-mutation DeleteDocument($acronym: String!, $documentId: ID!) {
-  deleteDocument(acronym: $acronym, documentId: $documentId) {
+mutation DeleteDocument(
+  $acronym: String!, 
+  $documentId: String!
+) {
+  deleteDocument(
+    acronym: $acronym, 
+    documentId: $documentId
+  ) {
     documentId
   }
 }

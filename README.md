@@ -8,7 +8,7 @@ Una aplicación personalizada para VTEX IO que muestra la lista de “galleta de
 
 - Obtención de frases desde Master Data (entidad `CF`)
 - Agregar nuevas galletas desde el modal
-- Eliminar galletas (no finalizado, la mutacion devuelve bad request)
+- Eliminar galletas `(no finalizado, la mutacion devuelve bad request)`
 
 ---
 ## Ver aplicación

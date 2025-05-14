@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback } from 'react';
 import { useQuery, useMutation } from 'react-apollo';
 import GET_ALL_FORTUNE_COOKIES from '../graphql/getCookies.graphql';
 import ADD_COOKIE_FORTUNE from '../graphql/addCookieFortune.graphql';
 import DELETE_COOKIE_FORTUNE from '../graphql/deleteCookieFortune.graphql';
 import { Table, Spinner, ButtonWithIcon, IconDelete } from 'vtex.styleguide';
 import { MessageDescriptor, useIntl } from 'react-intl';
-import { IcookieItem } from '../typings/cookies';
+import { IcookieItem, CreateDocumentVars } from '../typings/cookies';
 import { messages } from '../messages';
 import { AddModal } from './AddCookieModal';
 import { DeleteModal } from './DeleteCookieModal';
@@ -14,29 +14,41 @@ import { masterdataConfig } from '../config';
 
 
 export const FortuneCookies = () => {
-  const { acronym, fields, pageSize } = masterdataConfig;
+  const { acronym, fields, pageSize, mainField } = masterdataConfig;
   const [ items, setItems ] = useState<IcookieItem[]>([]);
   const [ isModalOpen, setModalOpen ] = useState<boolean>(false);
-  const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [ isDialogOpen, setDialogOpen ] = useState<boolean>(false);
   const [ newPhrase, setNewPhrase ] = useState<string>('');
   const [ selectedId, setSelectedId ] = useState<string>('');
   const intl = useIntl();
 
-  const { data, loading: isTableLoading } = useQuery<any>(GET_ALL_FORTUNE_COOKIES, {
+  const { data, loading: isTableLoading } = useQuery(GET_ALL_FORTUNE_COOKIES, {
+    fetchPolicy: 'no-cache',
+    context: {
+      fetchOptions: {
+        cache: 'no-store'
+      },
+    },
     variables: {
       acronym,
       fields,
       pageSize
     }
   });
-  const [ addCookie, { loading: isLoading } ] = useMutation(ADD_COOKIE_FORTUNE, {
-    onCompleted: (data) => {
-      handleAddItem(data?.addFortuneCookie);
-    }
+  const [ addCookie, { loading: isLoading } ] = useMutation<
+  { createDocument: { documentId: string } }, CreateDocumentVars>(ADD_COOKIE_FORTUNE, {
+      onCompleted: (data) => {
+        const newCookie = {
+          id: data?.createDocument?.documentId || '',
+          phrase: newPhrase
+        };
+        handleAddItem(newCookie);
+      }
   });
   const [ deleteCookie, { loading: isDeleting } ] = useMutation(DELETE_COOKIE_FORTUNE,{
       onCompleted: (data) => {
-        handleDeleteItem(data?.deleteFortuneCookie?.id);
+        console.log('data: ', data);
+        handleDeleteItem(data?.deleteDocument?.documentId);
       }
     }
   );
@@ -48,7 +60,14 @@ export const FortuneCookies = () => {
 
   const handleAddCookie = () => {
     if(newPhrase && newPhrase?.trim()){
-      addCookie({ variables: { phrase: newPhrase } });
+      addCookie({
+        variables: {
+          acronym,
+          document: {
+            fields: { key: mainField, value: newPhrase },
+          },
+        },
+      });
     }
   }
 
@@ -84,12 +103,15 @@ export const FortuneCookies = () => {
         width: 150,
         cellRenderer: ({ rowData }: any) => {
           return (
+            <>
             <ButtonWithIcon 
               className="ttc center" 
               size="small" 
               variation="danger"
               icon={<IconDelete />}
               onClick={() => handleDeleteCookie(rowData.id)} />
+
+            </>
           )
         },
       }

@@ -29,3 +29,14 @@ export interface Fortune {
     id: string
     phrase: string
 }
+
+export interface FieldInput {
+    key: string;
+    value: string;
+}
+export interface CreateDocumentVars {
+    acronym: string;
+    document: {
+      fields: FieldInput;
+    };
+}

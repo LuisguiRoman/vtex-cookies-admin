@@ -1,6 +1,0 @@
-query {
-  getFortuneCookies {
-    id,
-    CookieFortune
-  }
-}

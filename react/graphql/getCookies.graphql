@@ -1,4 +1,4 @@
-query documents(
+query Documents(
   $acronym: String!
   $fields:[String]!
   $page: Int

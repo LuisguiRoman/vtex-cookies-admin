@@ -1,5 +1,11 @@
-mutation deleteFortuneCookie($id: ID!) {
-  deleteFortuneCookie(id: $id){
-    id
+mutation DeleteCookieFortune(
+  $acronym: String!
+  $documentId: ID!
+) {
+  deleteDocument(
+    acronym: $acronym
+    documentId: $documentId
+  ) @context(provider: "vtex.store-graphql") {
+    documentId
   }
 }

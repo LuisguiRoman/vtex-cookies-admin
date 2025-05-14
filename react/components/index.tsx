@@ -1,17 +1,20 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { useQuery, useMutation } from 'react-apollo';
-import GET_ALL_FORTUNE_COOKIES from '../graphql/fortuneCookies.graphql';
+import GET_ALL_FORTUNE_COOKIES from '../graphql/getCookies.graphql';
 import ADD_COOKIE_FORTUNE from '../graphql/addCookieFortune.graphql';
 import DELETE_COOKIE_FORTUNE from '../graphql/deleteCookieFortune.graphql';
 import { Table, Spinner, ButtonWithIcon, IconDelete } from 'vtex.styleguide';
 import { MessageDescriptor, useIntl } from 'react-intl';
-import { IDataCookies, IcookieItem } from '../typings/cookies';
+import { IcookieItem } from '../typings/cookies';
 import { messages } from '../messages';
 import { AddModal } from './AddCookieModal';
 import { DeleteModal } from './DeleteCookieModal';
+import { parseFortunes } from '../utils';
+import { masterdataConfig } from '../config';
 
 
 export const FortuneCookies = () => {
+  const { acronym, fields, pageSize } = masterdataConfig;
   const [ items, setItems ] = useState<IcookieItem[]>([]);
   const [ isModalOpen, setModalOpen ] = useState<boolean>(false);
   const [isDialogOpen, setDialogOpen] = useState<boolean>(false);
@@ -19,7 +22,13 @@ export const FortuneCookies = () => {
   const [ selectedId, setSelectedId ] = useState<string>('');
   const intl = useIntl();
 
-  const { data, loading: isTableLoading } = useQuery<IDataCookies>(GET_ALL_FORTUNE_COOKIES);
+  const { data, loading: isTableLoading } = useQuery<any>(GET_ALL_FORTUNE_COOKIES, {
+    variables: {
+      acronym,
+      fields,
+      pageSize
+    }
+  });
   const [ addCookie, { loading: isLoading } ] = useMutation(ADD_COOKIE_FORTUNE, {
     onCompleted: (data) => {
       handleAddItem(data?.addFortuneCookie);
@@ -61,11 +70,7 @@ export const FortuneCookies = () => {
   }
 
   useEffect(() => {
-    const formatedItems = data?.getFortuneCookies?.map(cookie => ({
-      id: cookie.id,
-      phrase: cookie.CookieFortune,
-    })) || [];
-
+    const formatedItems = parseFortunes(data);
     setItems(formatedItems);
   }, [data]);
 

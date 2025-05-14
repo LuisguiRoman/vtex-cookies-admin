@@ -1,7 +1,7 @@
 {
   "vendor": "valtech",
   "name": "roman-admin-cookies",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Challenge Fortune Cookies",
   "description": "A sample app to create fortune cookies with masterdata",
   "builders": {
@@ -13,35 +13,8 @@
     "node": "6.x"
   },
   "dependencies": {
-    "vtex.styleguide": "9.x"
-  },
-  "policies": [
-    {
-      "name": "ADMIN_DS"
-    },
-    {
-      "name": "outbound-access",
-      "attrs": {
-        "host": "api.vtex.com",
-        "path": "/dataentities/*"
-      }
-    }
-  ],
-  "settingsSchema": {
-    "title": "Admin Fortune Cookies",
-    "type": "object",
-    "properties": {
-      "appKey": {
-        "title": "App key",
-        "description": "Enter your vtex app key (vtexappkey-XXXX) with masterdata permissions",
-        "type": "string"
-      },
-      "appToken": {
-        "title": "App Token",
-        "description": "Enter your vtex app token (XXXX...) with masterdata permissions",
-        "type": "string"
-      }
-    }
+    "vtex.styleguide": "9.x",
+    "vtex.store-graphql": "2.x"
   },
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
 }

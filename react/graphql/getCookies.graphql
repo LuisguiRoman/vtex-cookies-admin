@@ -1,0 +1,18 @@
+query documents(
+  $acronym: String!
+  $fields:[String]!
+  $page: Int
+  $pageSize: Int
+) {
+  documents (
+    acronym: $acronym
+    fields: $fields 
+    page: $page
+    pageSize: $pageSize
+  ) @context(provider: "vtex.store-graphql") {
+    fields{
+      key
+      value
+    }
+  }
+}

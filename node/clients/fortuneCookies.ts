@@ -1,5 +1,4 @@
 import { InstanceOptions, IOContext, ExternalClient } from '@vtex/api';
-import { IFortuneCookie, INewCookie, INewCookieR } from '../typings/fortuneCookies';
 import { API_URLS } from '../config';
 
 export class FortuneCookiesClient extends ExternalClient {
@@ -17,7 +16,7 @@ export class FortuneCookiesClient extends ExternalClient {
     })
   }
 
-  public getCookies = async (): Promise<IFortuneCookie[]> => {
+  public getCookies = async (): Promise<any> => {
     try {
       const response = await this.http.get(API_URLS.listCookies);
 
@@ -27,9 +26,9 @@ export class FortuneCookiesClient extends ExternalClient {
     }
   }
 
-  public addCookie = async (phrase: string): Promise<INewCookie> => {
+  public addCookie = async (phrase: string): Promise<any> => {
     try {
-      const response = await this.http.post<INewCookieR>(API_URLS.addCookie,
+      const response = await this.http.post<any>(API_URLS.addCookie,
         {
           CookieFortune: phrase
         }
